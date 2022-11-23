@@ -27,6 +27,7 @@ namespace CrowdSup.Domain.DomainServices.Token
             {
                 Subject = new ClaimsIdentity(new []
                 {
+                    new Claim("Id", usuario.Id.ToString()),
                     new Claim(ClaimTypes.Name, usuario.Nome)
                 }),
                 Expires = DateTime.UtcNow.AddHours(8),

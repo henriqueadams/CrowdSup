@@ -19,8 +19,19 @@ namespace CrowdSup.Infra.Data.repositories.usuarios
             await _context.SaveChangesAsync();
         }
 
+        public async Task AtualizarAsync(Usuario usuario)
+        {
+            await Task.Run(() => _context.Update(usuario));
+
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<Usuario> ObterLoginAsync(string email, string senha)
             => await _context.Usuarios
                 .FirstOrDefaultAsync(u => u.Email == email && u.Senha == senha);
+
+        public async Task<Usuario> ObterAsync(long Id)
+            => await _context.Usuarios
+                .FirstOrDefaultAsync(u => u.Id == Id);
     }
 }

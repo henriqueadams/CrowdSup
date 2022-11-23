@@ -36,5 +36,18 @@ namespace CrowdSup.Domain.Entities.Usuarios
             Telefone = telefone;
             Sexo = sexo;
         }
+
+        public void Atualizar(
+            string email,
+            string cidade,
+            string estado,
+            string telefone
+        )
+        {
+            Email = email;
+            Cidade = cidade;
+            Estado = estado;
+            Telefone = telefone;
+        }
     }
 }
