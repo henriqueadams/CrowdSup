@@ -17,6 +17,7 @@ namespace CrowdSup.Domain.Entities.Eventos
         public ICollection<Voluntario> Voluntarios { get; private set; }
         public int? QuantidadeParticipantes => Voluntarios?.Count;
         public bool Ativo => DataEvento > DateTime.Now;
+        public bool VagasDisponiveis => QuantidadeParticipantes < QuantidadeVoluntariosNecessarios;
 
         private Evento() { }
 

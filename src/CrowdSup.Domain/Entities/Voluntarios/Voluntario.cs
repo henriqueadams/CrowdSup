@@ -13,9 +13,8 @@ namespace CrowdSup.Domain.Entities.Voluntarios
 
         private Voluntario() { }
 
-        public Voluntario(int id, Usuario usuario, Evento evento)
+        public Voluntario(Usuario usuario, Evento evento)
         {
-            Id = id;
             UsuarioId = usuario.Id;
             Usuario = usuario;
             EventoId = evento.Id;
