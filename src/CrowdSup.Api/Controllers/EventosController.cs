@@ -67,6 +67,15 @@ namespace CrowdSup.Api.Controllers
             return EventosPaginadosResponseMapper.Map(eventos, request.Pagina);
         }
 
+        [HttpGet("pesquisar")]
+        [Authorize]
+        public async Task<EventosPaginadosResponse> ListarPesquisaAsync([FromQuery] ListarEventosPesquisaRequest request)
+        {
+            var eventos = await _eventoRepository.ListarAsync(request.Cidade, request.Pagina);
+
+            return EventosPaginadosResponseMapper.Map(eventos, request.Pagina);
+        }
+
         [HttpPost("join")]
         [Authorize]
         public async Task<ActionResult> ParticiarEventoAsync([FromQuery] ParticiparRequest request)

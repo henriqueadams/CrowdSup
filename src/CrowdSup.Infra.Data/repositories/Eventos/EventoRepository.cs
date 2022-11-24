@@ -36,7 +36,7 @@ namespace CrowdSup.Infra.Data.repositories.Eventos
             var eventos = await _context.Eventos
                 .Include(e => e.Organizador)
                 .Include(e => e.Voluntarios)
-                .Where(e => e.Endereco.Cidade == cidade)
+                .Where(e => e.Endereco.Cidade.ToUpper().Contains(cidade.ToUpper()))
                 .OrderByDescending(e => e.DataEvento)
                 .ToListAsync();
 
