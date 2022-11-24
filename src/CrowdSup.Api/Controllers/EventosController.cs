@@ -81,13 +81,35 @@ namespace CrowdSup.Api.Controllers
 
             if (evento.Voluntarios.Any(v => v.UsuarioId == usuario.Id))
                 return BadRequest("Você já está participante desse evento");
-            
+
             if (!evento.VagasDisponiveis)
                 return BadRequest("Esse evento já está lotado");
 
             var voluntario = new Voluntario(usuario, evento);
 
             await _voluntarioRepository.InserirAsync(voluntario);
+
+            return Ok();
+        }
+
+        [HttpPut("cancelar")]
+        [Authorize]
+        public async Task<ActionResult> CancelarAsync([FromBody] CancelarEventoRequest request)
+        {
+            var id = _claims?.FirstOrDefault(c => c.Type.ToUpper() == "ID")?.Value;
+
+            var usuario = await _usuarioRepository.ObterAsync(Int32.Parse(id));
+
+            var evento = await _eventoRepository.ObterAsync(request.EventoId);
+            if (evento is null)
+                return BadRequest("Não foi possível obter o evento");
+
+            if (evento.OrganizadorId != usuario.Id)
+                return BadRequest("Você não tem permissao para cancelar esse evento");
+
+            evento.Cancelar();
+
+            await _eventoRepository.AtualizarAsync(evento);
 
             return Ok();
         }

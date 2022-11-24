@@ -15,8 +15,9 @@ namespace CrowdSup.Domain.Entities.Eventos
         public Usuario Organizador { get; private set; }
         public int QuantidadeVoluntariosNecessarios { get; private set; }
         public ICollection<Voluntario> Voluntarios { get; private set; }
+        public bool Cancelado { get; private set; }
         public int? QuantidadeParticipantes => Voluntarios?.Count;
-        public bool Ativo => DataEvento > DateTime.Now;
+        public bool Ativo => (DataEvento > DateTime.Now) && !Cancelado;
         public bool VagasDisponiveis => QuantidadeParticipantes < QuantidadeVoluntariosNecessarios;
 
         private Evento() { }
@@ -38,5 +39,8 @@ namespace CrowdSup.Domain.Entities.Eventos
             OrganizadorId = organizador.Id;
             Organizador = organizador;
         }
+
+        public void Cancelar()
+            => Cancelado = true;
     }
 }

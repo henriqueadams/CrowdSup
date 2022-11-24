@@ -89,3 +89,12 @@ VALUES ('20221123232605_UpdateEventos', '6.0.10');
 
 COMMIT;
 
+START TRANSACTION;
+
+ALTER TABLE "EVENTOS" ADD "CANCELADO" boolean NOT NULL DEFAULT FALSE;
+
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20221124223640_CreateFieldCanceladoToEventos', '6.0.10');
+
+COMMIT;
+

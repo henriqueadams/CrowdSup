@@ -19,6 +19,13 @@ namespace CrowdSup.Infra.Data.repositories.Eventos
             await _context.SaveChangesAsync();
         }
 
+        public async Task AtualizarAsync(Evento evento)
+        {
+            await Task.Run(() => _context.Update(evento));
+
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<Evento> ObterAsync(long Id)
             => await _context.Eventos
                 .Include(e => e.Voluntarios)
