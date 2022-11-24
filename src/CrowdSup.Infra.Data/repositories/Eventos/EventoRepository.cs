@@ -55,5 +55,28 @@ namespace CrowdSup.Infra.Data.repositories.Eventos
 
             return eventosPaginados;
         }
+
+        public async Task<IEnumerable<Evento>> ListarPorUsuarioAsync(long usuarioId, int pagina)
+        {
+            var eventos = await _context.Eventos
+                .Include(e => e.Organizador)
+                .Include(e => e.Voluntarios)
+                .Where(e => e.Voluntarios.Any(v => v.UsuarioId == usuarioId))
+                .OrderByDescending(e => e.DataEvento)
+                .ToListAsync();
+
+            var tamanhoPagina = 10;
+            var eventosPaginados = new List<Evento>();
+            var inicioPagina = (tamanhoPagina * pagina) - tamanhoPagina;
+            for (int i = inicioPagina; i < inicioPagina + tamanhoPagina; i++)
+            {
+                if (eventos.Count <= i)
+                    break;
+
+                eventosPaginados.Add(eventos[i]);
+            }
+
+            return eventosPaginados;
+        }
     }
 }

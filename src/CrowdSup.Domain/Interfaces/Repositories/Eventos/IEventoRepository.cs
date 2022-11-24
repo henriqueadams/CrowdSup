@@ -8,5 +8,6 @@ namespace CrowdSup.Domain.Interfaces.Repositories.Eventos
         Task AtualizarAsync(Evento evento);
         Task<Evento> ObterAsync(long Id);
         Task<IEnumerable<Evento>> ListarAsync(string cidade, int pagina);
+        Task<IEnumerable<Evento>> ListarPorUsuarioAsync(long usuarioId, int pagina);
     }
 }

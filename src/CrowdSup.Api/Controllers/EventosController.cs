@@ -76,6 +76,19 @@ namespace CrowdSup.Api.Controllers
             return EventosPaginadosResponseMapper.Map(eventos, request.Pagina);
         }
 
+        [HttpGet("perfil")]
+        [Authorize]
+        public async Task<ActionResult<EventosPaginadosResponse>> ListarPerfilAsync([FromQuery] ListarEventosPerfilRequest request)
+        {
+            var usuario = await _usuarioRepository.ObterAsync(request.UsuarioId);
+            if (usuario is null)
+                return BadRequest("Usuário não encontrado");
+
+            var eventos = await _eventoRepository.ListarPorUsuarioAsync(usuario.Id, request.Pagina);
+
+            return EventosPaginadosResponseMapper.Map(eventos, request.Pagina);
+        }
+
         [HttpPost("join")]
         [Authorize]
         public async Task<ActionResult> ParticiarEventoAsync([FromQuery] ParticiparRequest request)
