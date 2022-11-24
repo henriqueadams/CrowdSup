@@ -19,7 +19,6 @@ namespace CrowdSup.Infra.Data.Context.Mappers.Eventos
             builder.Property(x => x.DataEvento).HasColumnName("DATA_EVENTO").IsRequired();
             builder.Property(x => x.OrganizadorId).HasColumnName("ORGANIZADOR_ID").IsRequired();
             builder.Property(x => x.QuantidadeVoluntariosNecessarios).HasColumnName("QTD_VOLUNT_NEC").IsRequired();
-            builder.Property(x => x.QuantidadeParticipantes).HasColumnName("QTD_PARTICIPANTES");
 
             MapEndereco(builder);
 

@@ -22,7 +22,7 @@ namespace CrowdSup.Infra.Data.Context.Mappers.Voluntarios
                .HasForeignKey(x => x.UsuarioId).HasConstraintName("FK_VOLUNTARIO_USUARIO");
 
             builder.HasOne(x => x.Evento)
-               .WithMany()
+               .WithMany(x => x.Voluntarios)
                .HasForeignKey(x => x.EventoId).HasConstraintName("FK_VOLUNTARIO_EVENTO");
         }
     }

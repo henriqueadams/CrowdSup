@@ -80,3 +80,12 @@ VALUES ('20221111005448_UpdateTelefone', '6.0.10');
 
 COMMIT;
 
+START TRANSACTION;
+
+ALTER TABLE "EVENTOS" DROP COLUMN "QTD_PARTICIPANTES";
+
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20221123232605_UpdateEventos', '6.0.10');
+
+COMMIT;
+

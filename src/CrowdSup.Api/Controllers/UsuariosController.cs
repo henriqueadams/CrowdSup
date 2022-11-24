@@ -24,7 +24,7 @@ namespace CrowdSup.Api.Controllers
 
         [HttpPut]
         [Authorize]
-        public async Task<ActionResult> AtualizarAsync(AtualizarUsuarioRequest request)
+        public async Task<ActionResult> AtualizarAsync([FromBody] AtualizarUsuarioRequest request)
         {
             var id = _claims?.FirstOrDefault(c => c.Type.ToUpper() == "ID")?.Value;
 

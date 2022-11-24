@@ -1,4 +1,5 @@
 using CrowdSup.Domain.Entities.Usuarios;
+using CrowdSup.Domain.Entities.Voluntarios;
 using CrowdSup.Domain.ValueObjects;
 
 namespace CrowdSup.Domain.Entities.Eventos
@@ -13,28 +14,26 @@ namespace CrowdSup.Domain.Entities.Eventos
         public int OrganizadorId { get; private set; }
         public Usuario Organizador { get; private set; }
         public int QuantidadeVoluntariosNecessarios { get; private set; }
-        public int QuantidadeParticipantes { get; private set; }
+        public ICollection<Voluntario> Voluntarios { get; private set; }
+        public int? QuantidadeParticipantes => Voluntarios?.Count;
+        public bool Ativo => DataEvento > DateTime.Now;
 
         private Evento() { }
 
         public Evento(
-            int id,
             string titulo,
             string descricao,
-            DateTime dataEvento,
             Endereco endereco,
+            DateTime dataEvento,
             int quantidadeVoluntariosNecessarios,
-            int quantidadeParticipantes,
             Usuario organizador
         )
         {
-            Id = id;
             Titulo = titulo;
             Descricao = descricao;
             DataEvento = dataEvento;
             Endereco = endereco;
             QuantidadeVoluntariosNecessarios = quantidadeVoluntariosNecessarios;
-            QuantidadeParticipantes = quantidadeParticipantes;
             OrganizadorId = organizador.Id;
             Organizador = organizador;
         }

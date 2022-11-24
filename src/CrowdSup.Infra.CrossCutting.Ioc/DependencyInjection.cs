@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using CrowdSup.Infra.Data.repositories.usuarios;
 using CrowdSup.Domain.Interfaces.Repositories.Usuarios;
+using CrowdSup.Infra.Data.repositories.Eventos;
+using CrowdSup.Domain.Interfaces.Repositories.Eventos;
 
 namespace CrowdSup.Infra.CrossCutting.Ioc
 {
@@ -21,6 +23,7 @@ namespace CrowdSup.Infra.CrossCutting.Ioc
 
             // Repositories
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
+            services.AddTransient<IEventoRepository, EventoRepository>();
 
             // Database Contexts
             services.AddDbContext<CrowdsupContext>(options => 
