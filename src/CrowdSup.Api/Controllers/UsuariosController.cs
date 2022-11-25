@@ -1,5 +1,7 @@
 using System.Security.Claims;
+using CrowdSup.Api.Models.Mappers.Usuarios;
 using CrowdSup.Api.Models.Requests.Usuarios;
+using CrowdSup.Api.Models.Responses.Usuarios;
 using CrowdSup.Domain.Interfaces.Repositories.Usuarios;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +22,17 @@ namespace CrowdSup.Api.Controllers
         {
             _usuarioRepository = usuarioRepository;
             _claims = context.HttpContext?.User?.Claims?.ToList();
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult<UsuarioResponse>> ObterAsync([FromQuery] ObterUsuarioRequest request)
+        {
+            var id = _claims?.FirstOrDefault(c => c.Type.ToUpper() == "ID")?.Value;
+
+            var usuario = await _usuarioRepository.ObterAsync(Int32.Parse(id));
+
+            return UsuarioResponseMapper.Map(usuario);
         }
 
         [HttpPut]
