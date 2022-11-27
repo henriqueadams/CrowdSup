@@ -17,7 +17,7 @@ namespace CrowdSup.Infra.Data.Context.Mappers.Usuarios
             builder.Property(x => x.Nome).HasColumnName("NOME").HasMaxLength(150).IsRequired();
             builder.Property(x => x.Email).HasColumnName("EMAIL").HasMaxLength(150).IsRequired();
             builder.Property(x => x.Senha).HasColumnName("SENHA").IsRequired();
-            builder.Property(x => x.FotoPerfil).HasColumnName("FOTO_PERFIL").HasMaxLength(500);
+            builder.Property(x => x.FotoPerfil).HasColumnName("FOTO_PERFIL").HasMaxLength(500).IsRequired(false);
             builder.Property(x => x.DataNascimento).HasColumnName("DATA_NASCIMENTO").IsRequired();
             builder.Property(x => x.Cidade).HasColumnName("CIDADE").HasMaxLength(150).IsRequired();
             builder.Property(x => x.Estado).HasColumnName("ESTADO").HasMaxLength(150).IsRequired();

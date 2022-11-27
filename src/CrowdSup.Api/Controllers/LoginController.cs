@@ -19,7 +19,7 @@ namespace CrowdSup.Api.Controllers
             IHashService hashService,
             ITokenService tokenService
         )
-        { 
+        {
             _usuarioRepository = usuarioRepository;
             _hashService = hashService;
             _tokenService = tokenService;
@@ -31,7 +31,6 @@ namespace CrowdSup.Api.Controllers
             var senhaCriptografada = _hashService.GerarMd5(request.Senha);
 
             var usuarioLogado = await _usuarioRepository.ObterLoginAsync(request.Email, senhaCriptografada);
-
             if (usuarioLogado is null)
                 return Unauthorized(new { message = "Usuário ou senha inválidos" });
 

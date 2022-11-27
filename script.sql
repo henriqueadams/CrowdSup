@@ -114,3 +114,12 @@ VALUES ('20221127171818_FotoPerfilNotRequired', '6.0.10');
 
 COMMIT;
 
+START TRANSACTION;
+
+ALTER TABLE "USUARIOS" ALTER COLUMN "FOTO_PERFIL" DROP NOT NULL;
+
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20221127195314_FotoPerfilIsRequiredFalse', '6.0.10');
+
+COMMIT;
+
