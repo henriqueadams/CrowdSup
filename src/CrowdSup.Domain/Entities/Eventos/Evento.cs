@@ -47,5 +47,8 @@ namespace CrowdSup.Domain.Entities.Eventos
 
         public void UsuarioEstaNoEvento(long usuarioId)
             => EstaNoEvento = Voluntarios.Any(v => v.UsuarioId == usuarioId);
+        
+        public void RemoverVoluntario(Voluntario voluntario)
+            => Voluntarios.Remove(voluntario);
     }
 }

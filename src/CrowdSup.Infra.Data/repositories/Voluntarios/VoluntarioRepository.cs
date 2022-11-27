@@ -1,6 +1,7 @@
 using CrowdSup.Domain.Entities.Voluntarios;
 using CrowdSup.Domain.Interfaces.Repositories.Voluntarios;
 using CrowdSup.Infra.Data.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace CrowdSup.Infra.Data.repositories.Voluntarios
 {
@@ -17,5 +18,10 @@ namespace CrowdSup.Infra.Data.repositories.Voluntarios
 
             await _context.SaveChangesAsync();
         }
+
+        public async Task<Voluntario> ObterPorUsuarioAndEventoAsync(long usuarioId, long eventoId)
+            => await _context.Voluntarios
+                .FirstOrDefaultAsync(v => v.UsuarioId == usuarioId && 
+                                          v.EventoId == eventoId);
     }
 }

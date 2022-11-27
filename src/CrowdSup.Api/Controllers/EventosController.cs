@@ -137,10 +137,19 @@ namespace CrowdSup.Api.Controllers
             if (evento is null)
                 return BadRequest("Não foi possível obter o evento");
 
-            if (evento.OrganizadorId != usuario.Id)
-                return BadRequest("Você não tem permissao para cancelar esse evento");
+            if (evento.OrganizadorId == usuario.Id)
+                evento.Cancelar();
+            else
+            {
+                evento.UsuarioEstaNoEvento(usuario.Id);
 
-            evento.Cancelar();
+                if (!evento.EstaNoEvento)
+                    return BadRequest("Você não está participante do evento");
+
+                var voluntario = await _voluntarioRepository.ObterPorUsuarioAndEventoAsync(usuario.Id, evento.Id);
+                
+                evento.RemoverVoluntario(voluntario);
+            }
 
             await _eventoRepository.AtualizarAsync(evento);
 
