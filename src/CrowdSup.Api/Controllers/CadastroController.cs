@@ -30,7 +30,11 @@ namespace CrowdSup.Api.Controllers
 
             var senhaCriptografada = _hashService.GerarMd5(request.Senha);
 
-            var usuario = new Usuario(request.Nome, request.Email, senhaCriptografada, request.DataNascimento, 
+            var usuarioExistente = _usuarioRepository.ObterPorEmailAsync(request.Email);
+            if (usuarioExistente != null)
+                return BadRequest("Já existe um cadastro para o e-mail informado");
+
+            var usuario = new Usuario(request.Nome, request.Email, senhaCriptografada, request.DataNascimento,
                 request.Cidade, request.Estado, request.Telefone, request.Sexo);
 
             await _usuarioRepository.InserirAsync(usuario);

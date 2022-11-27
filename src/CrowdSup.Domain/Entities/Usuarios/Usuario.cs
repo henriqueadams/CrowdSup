@@ -8,6 +8,7 @@ namespace CrowdSup.Domain.Entities.Usuarios
         public string Nome { get; private set; }
         public string Email { get; private set; }
         public string Senha { get; private set; }
+        public string FotoPerfil { get; private set; }
         public DateTime DataNascimento { get; private set; }
         public string Cidade { get; private set; }
         public string Estado { get; private set; }
@@ -38,13 +39,13 @@ namespace CrowdSup.Domain.Entities.Usuarios
         }
 
         public void Atualizar(
-            string email,
+            string fotoPerfil,
             string cidade,
             string estado,
             string telefone
         )
         {
-            Email = email;
+            FotoPerfil = fotoPerfil;
             Cidade = cidade;
             Estado = estado;
             Telefone = telefone;

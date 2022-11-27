@@ -98,3 +98,19 @@ VALUES ('20221124223640_CreateFieldCanceladoToEventos', '6.0.10');
 
 COMMIT;
 
+START TRANSACTION;
+
+ALTER TABLE "USUARIOS" ADD "FOTO_PERFIL" character varying(500) NOT NULL DEFAULT '';
+
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20221125223000_AddFotoPerfilToUsuarios', '6.0.10');
+
+COMMIT;
+
+START TRANSACTION;
+
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20221127171818_FotoPerfilNotRequired', '6.0.10');
+
+COMMIT;
+

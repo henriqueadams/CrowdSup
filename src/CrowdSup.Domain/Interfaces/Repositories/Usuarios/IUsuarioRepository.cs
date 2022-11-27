@@ -8,5 +8,6 @@ namespace CrowdSup.Domain.Interfaces.Repositories.Usuarios
         Task AtualizarAsync(Usuario usuario);
         Task<Usuario> ObterLoginAsync(string email, string senha);
         Task<Usuario> ObterAsync(long Id);
+        Task<Usuario> ObterPorEmailAsync(string email);
     }
 }

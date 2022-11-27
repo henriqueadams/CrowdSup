@@ -43,7 +43,7 @@ namespace CrowdSup.Api.Controllers
 
             var usuario = await _usuarioRepository.ObterAsync(Int32.Parse(id));
 
-            usuario.Atualizar(request.Email, request.Cidade, request.Estado, request.Telefone);
+            usuario.Atualizar(request.FotoPerfil, request.Cidade, request.Estado, request.Telefone);
 
             await _usuarioRepository.AtualizarAsync(usuario);
 

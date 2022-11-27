@@ -33,5 +33,9 @@ namespace CrowdSup.Infra.Data.repositories.usuarios
         public async Task<Usuario> ObterAsync(long Id)
             => await _context.Usuarios
                 .FirstOrDefaultAsync(u => u.Id == Id);
+
+         public async Task<Usuario> ObterPorEmailAsync(string email)
+            => await _context.Usuarios
+                .FirstOrDefaultAsync(u => u.Email == email);
     }
 }

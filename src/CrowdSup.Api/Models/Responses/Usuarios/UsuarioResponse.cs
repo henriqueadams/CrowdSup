@@ -6,6 +6,7 @@ namespace CrowdSup.Api.Models.Responses.Usuarios
     {
         public int Id { get; set; }
         public string Nome { get; set; }
+        public string FotoPerfil { get; set; }
         public DateTime DataNascimento { get; set; }
         public string Cidade { get; set; }
         public string Estado { get; set; }
@@ -15,6 +16,7 @@ namespace CrowdSup.Api.Models.Responses.Usuarios
         public UsuarioResponse(
             int id,
             string nome,
+            string fotoPerfil,
             DateTime dataNascimento,
             string cidade,
             string estado,
@@ -24,6 +26,7 @@ namespace CrowdSup.Api.Models.Responses.Usuarios
         {
             Id = id;
             Nome = nome;
+            FotoPerfil = fotoPerfil;
             DataNascimento = dataNascimento;
             Cidade = cidade;
             Estado = estado;
