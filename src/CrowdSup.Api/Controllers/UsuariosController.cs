@@ -26,11 +26,22 @@ namespace CrowdSup.Api.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<UsuarioResponse>> ObterAsync([FromQuery] ObterUsuarioRequest request)
+        public async Task<ActionResult<UsuarioResponse>> ObterAsync()
         {
             var id = _claims?.FirstOrDefault(c => c.Type.ToUpper() == "ID")?.Value;
 
             var usuario = await _usuarioRepository.ObterAsync(Int32.Parse(id));
+
+            return UsuarioResponseMapper.Map(usuario);
+        }
+
+        [HttpGet("perfil")]
+        [Authorize]
+        public async Task<ActionResult<UsuarioResponse>> ObterPorIdAsync([FromQuery] ObterUsuarioRequest request)
+        {
+            var usuario = await _usuarioRepository.ObterAsync(request.Id);
+            if (usuario is null)
+                return BadRequest("Usuário não encontrado");
 
             return UsuarioResponseMapper.Map(usuario);
         }
