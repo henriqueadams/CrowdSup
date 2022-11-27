@@ -13,6 +13,10 @@ namespace CrowdSup.Api.Models.Responses.Eventos
         public UsuarioResponse Organizador { get; set; }
         public int QuantidadeVoluntariosNecessarios { get; set; }
         public int? QuantidadeParticipantes { get; set; }
+        public bool Cancelado { get; set; }
+        public bool Expirado { get; set; }
+        public bool VagasDisponiveis { get; set; }
+        public bool EstaNoEvento { get; set; }
 
         public EventoResponse(
             int id,
@@ -22,7 +26,11 @@ namespace CrowdSup.Api.Models.Responses.Eventos
             DateTime dataEvento,
             UsuarioResponse organizador,
             int quantidadeVoluntariosNecessarios,
-            int? quantidadeParticipantes
+            int? quantidadeParticipantes,
+            bool cancelado,
+            bool expirado,
+            bool vagasDisponiveis,
+            bool estaNoEvento
         )
         {
             Id = id;
@@ -33,6 +41,10 @@ namespace CrowdSup.Api.Models.Responses.Eventos
             Organizador = organizador;
             QuantidadeVoluntariosNecessarios = quantidadeVoluntariosNecessarios;
             QuantidadeParticipantes = quantidadeParticipantes;
+            Cancelado = cancelado;
+            Expirado = expirado;
+            VagasDisponiveis = vagasDisponiveis;
+            EstaNoEvento = estaNoEvento;
         }
     }
 }

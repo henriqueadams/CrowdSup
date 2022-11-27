@@ -26,6 +26,8 @@ namespace CrowdSup.Infra.Data.Context.Mappers.Eventos
             builder.HasOne(x => x.Organizador)
                 .WithMany()
                 .HasForeignKey(x => x.OrganizadorId).HasConstraintName("FK_EVENTO_ORGANIZADOR");
+            
+            builder.Ignore(x => x.EstaNoEvento);
         }
 
         private void MapEndereco(EntityTypeBuilder<Evento> builder)

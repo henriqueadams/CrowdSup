@@ -17,8 +17,10 @@ namespace CrowdSup.Domain.Entities.Eventos
         public ICollection<Voluntario> Voluntarios { get; private set; }
         public bool Cancelado { get; private set; }
         public int? QuantidadeParticipantes => Voluntarios?.Count;
-        public bool Ativo => (DataEvento > DateTime.Now) && !Cancelado;
+        public bool Ativo => !Expirado && !Cancelado;
+        public bool Expirado => DataEvento < DateTime.Now;
         public bool VagasDisponiveis => QuantidadeParticipantes < QuantidadeVoluntariosNecessarios;
+        public bool EstaNoEvento { get; private set; }
 
         private Evento() { }
 
@@ -42,5 +44,8 @@ namespace CrowdSup.Domain.Entities.Eventos
 
         public void Cancelar()
             => Cancelado = true;
+
+        public void UsuarioEstaNoEvento(long usuarioId)
+            => EstaNoEvento = Voluntarios.Any(v => v.UsuarioId == usuarioId);
     }
 }

@@ -15,7 +15,8 @@ namespace CrowdSup.Api.Models.Mappers.Eventos
                 return default;
 
             return new EventoResponse(evento.Id, evento.Titulo, evento.Descricao, evento.Endereco, evento.DataEvento,
-                UsuarioResponseMapper.Map(evento.Organizador), evento.QuantidadeVoluntariosNecessarios, evento.QuantidadeParticipantes);
+                UsuarioResponseMapper.Map(evento.Organizador), evento.QuantidadeVoluntariosNecessarios, evento.QuantidadeParticipantes,
+                evento.Cancelado, evento.Expirado, evento.VagasDisponiveis, evento.EstaNoEvento);
         }
     }
 }
