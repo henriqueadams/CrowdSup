@@ -19,9 +19,12 @@ namespace CrowdSup.Infra.Data.repositories.Voluntarios
             await _context.SaveChangesAsync();
         }
 
+        public void Remover(Voluntario voluntario)
+            => _context.Remove(voluntario);
+
         public async Task<Voluntario> ObterPorUsuarioAndEventoAsync(long usuarioId, long eventoId)
             => await _context.Voluntarios
-                .FirstOrDefaultAsync(v => v.UsuarioId == usuarioId && 
+                .FirstOrDefaultAsync(v => v.UsuarioId == usuarioId &&
                                           v.EventoId == eventoId);
     }
 }

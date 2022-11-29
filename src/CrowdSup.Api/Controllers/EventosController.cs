@@ -151,6 +151,8 @@ namespace CrowdSup.Api.Controllers
                 var voluntario = await _voluntarioRepository.ObterPorUsuarioAndEventoAsync(usuario.Id, evento.Id);
                 
                 evento.RemoverVoluntario(voluntario);
+
+                _voluntarioRepository.Remover(voluntario);
             }
 
             await _eventoRepository.AtualizarAsync(evento);

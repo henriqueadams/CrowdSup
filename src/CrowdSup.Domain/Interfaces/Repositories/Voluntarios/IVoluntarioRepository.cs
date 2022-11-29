@@ -5,6 +5,7 @@ namespace CrowdSup.Domain.Interfaces.Repositories.Voluntarios
     public interface IVoluntarioRepository
     {
         Task InserirAsync(Voluntario voluntario);
+        void Remover(Voluntario voluntario);
         Task<Voluntario> ObterPorUsuarioAndEventoAsync(long Id, long eventoId);
     }
 }
