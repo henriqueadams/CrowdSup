@@ -88,6 +88,8 @@ namespace CrowdSup.Api.Controllers
         [Authorize]
         public async Task<ActionResult<EventosPaginadosResponse>> ListarPerfilAsync([FromQuery] ListarEventosPerfilRequest request)
         {
+            var usuarioLogadoId = _claims?.FirstOrDefault(c => c.Type.ToUpper() == "ID")?.Value;
+
             var usuario = await _usuarioRepository.ObterAsync(request.UsuarioId);
             if (usuario is null)
                 return BadRequest("Usuário não encontrado");
@@ -95,7 +97,7 @@ namespace CrowdSup.Api.Controllers
             var eventos = await _eventoRepository.ListarPorUsuarioAsync(usuario.Id, request.Pagina);
 
             foreach (var evento in eventos)
-                evento.UsuarioEstaNoEvento(usuario.Id);
+                evento.UsuarioEstaNoEvento(Int32.Parse(usuarioLogadoId));
 
             return EventosPaginadosResponseMapper.Map(eventos, request.Pagina);
         }
